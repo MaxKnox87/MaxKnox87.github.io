@@ -1,7 +1,151 @@
 <!DOCTYPE html>
-<html>
-<body>
-<h1>Hello World</h1>
-<p>TESTING</p>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Maxwell Knox</title>
+
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="animate.css-master/animate.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="flipgallery/settings.js"></script>
+    <script type="text/javascript" src="flipgallery/flipgallery.min.js"></script>
+    <script src="scripts.js"></script>
+</head>
+<body onLoad="flipGallery()">
+
+<!-- MAIN NAVIGATION -->
+
+<ul>
+    <li class="navItem"><a href="#title" title="Home">Home</a></li>
+    <li class="navItem"><a href="#about" title="About">About</a></li>
+    <li class="navItem"><a href="#work" title="Work">Work</a></li>
+    <li class="navItem"><a href="#cv" title="C.V.">C.V.</a></li>
+    <li class="navItem"><a href="#contact" title="Contact">Contact</a></li>
+</ul>
+
+<!-- HEADER SECTION -->
+
+<header>
+    <div id="title">
+        <h1 id="titleh1" >Maxwell Knox</h1>
+        <h2 id="titleh2" >Web Design and Digital Media</h2>
+        <a href="#about" ><img class="down" src="images/downarrw.png"/></a>
+    </div>
+</header>
+
+<!-- ABOUT SECTION -->
+
+<section id="about">
+    <h2 class="sectiontitle">About Me</h2>
+    <img id="man" src="images/man.png"/>
+    <p id="abouttxt">I'm currently studying at RGU for a degree in Digital Media. My interests lie mainly in user
+        experience design and front-end web development. Recent projects, however, have seen me working in areas such
+        as game developement and video production. Aside from work I like to play football when I can, and sneak in
+        an occasional game or two of dota!
+    </p>
+    <a href="#work"><img class="down" src="images/downarrw.png"/></a>
+</section>
+
+
+<!-- WORK SECTION -->
+
+<section id="work">
+    <h2 class="sectiontitle">My Work</h2>
+    <div id="flipGallery"></div>
+    <a href="#cv"><img class="down" id="workdown" src="images/downarrw.png"/></a>
+
+
+
+</section>
+
+<!-- CV SECTION -->
+
+<section id="cv">
+
+    <h2 class="sectiontitle" id="maintitlecv">Curriculum Vitae</h2>
+
+    <div id="cvwrap">
+        <article id="timeline">
+            <h3 class="cvsubtitle">Timeline</h3>
+            <h4>March 2014</h4>
+            <p class="italic">Successfully undertook first freelance client project.</p>
+            <br>
+            <h4>May 2015</h4>
+            <p class="italic">Completed HND in Digital Media.</p>
+            <br>
+            <h4>Sept 2015</h4>
+            <p class="italic">Began 3rd year of bachelors degree in Digital Media at RGU.</p>
+
+
+
+        </article>
+        <article id="workhistory">
+            <h3 class="cvsubtitle">Recent Work History</h3>
+
+            <h4>[May 2015 – Sept 2015] The Dutch Mill</h4>
+            <p class="italic">Restaurant/Bar Staff</p>
+            <hr>
+            <p>Working in a busy bar and restaurant in the West end of Aberdeen. Duties included a high level of guest
+                interaction
+                and care, delivering service to a high standard of
+                quality.</p>
+            <br>
+            <br>
+            <h4>[Aug 2012 – March 2014] Hilton Craigendarroch</h4>
+            <p class="italic">Restaurant/Bar Staff</p>
+            <hr>
+            <p>Working as a front of house member of staff in a busy Hilton hotel in Aberdeenshire. High level of guest interaction and care, delivering service to a high standard of quality.</p>
+            <br>
+            <br>
+            <h4>[Feb 2011 – Aug 2011] Pexel Ltd.</h4>
+            <p class="italic">Telephone based market researcher – Team leader</p>
+            <hr>
+            <p>Team leader in a call centre focused on both domestic and international market research. Duties included creating project briefs and scripts, delegating tasks, ensuring project goals were met, and ensuring both qualitative and quantitative research was carried out to meet client expectations.</p>
+
+
+
+        </article>
+
+    </div>
+    <a href="#contact"><img class="down" src="images/downarrw.png"/></a>
+</section>
+
+<!-- CONTACT SECTION -->
+
+<section id="contact">
+
+    <h2 class="sectiontitle" >Contact</h2>
+
+    <h3>Please use the form below to get in touch!</h3>
+
+    <div id="contact-area">
+
+        <form id="contactform" method="post">
+
+            <h4>Name:</h4>
+            <input type="text" name="Name" id="Name" />
+            <h4>Location:</h4>
+            <input type="text" name="City" id="City" />
+            <h4>Email:</h4>
+            <input type="text" name="Email" id="Email" />
+            <h4>Message:</h4>
+            <textarea name="Message" rows="20" cols="50" id="Message"></textarea>
+
+            <input id="contactbtn" type="submit" name="submit" value="Contact Me!"  />
+        </form>
+
+        <div style="clear: both;"></div>
+
+
+
+    </div>
+    <a href="#title"><img class="up" src="images/uparrw.png"/></a>
+
+</section>
+
+<footer></footer>
+
 </body>
 </html>
