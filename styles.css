@@ -1,0 +1,267 @@
+@import url(https://fonts.googleapis.com/css?family=Oswald);
+@import url(https://fonts.googleapis.com/css?family=Lora:400,400italic,700,700italic);
+
+
+/************** HEADER AND GENERAL STYLES ****************/
+
+header {
+    height:100vh;
+    background-color:#22A7F0;
+
+}
+
+h3{
+    font-size:1.4em;
+    font-family:'Oswald';
+    color:white;
+}
+
+h4{
+    font-size:1.2em;
+    font-family:'Oswald';
+    color:white;
+}
+
+hr{
+    border: 0;
+    height: 1px;
+    background: #FFF;
+}
+
+a {
+    color: white;
+    outline:0;
+}
+
+a:visited {
+    color:white;
+}
+
+a:hover{
+    color:darkblue;
+}
+
+p{
+    color:white;
+    font-family: 'Lora';
+    font-size: 1em;
+}
+
+
+
+/********* MAIN NAVIGATION *************/
+
+
+#mainNav{
+    position:fixed;
+    font-family: 'Oswald';
+    font-size: 2em;
+    display:flex;
+    z-index: 9999;
+}
+
+ul {
+    font-family: 'Oswald';
+    font-size: 2em;
+    position:fixed;
+    width:100%;
+    display: flex;
+    list-style: none;
+    background-color: #22A7F0;
+}
+
+li {
+    margin-top:10px;
+    margin-bottom:10px;
+    flex: 1 1 100%;
+    text-align: center;
+}
+
+li>a {
+    text-decoration: none;
+}
+
+.down {
+    width: 64px;
+    height:64px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 20px;
+}
+.down:hover{
+    opacity:0.5;
+}
+
+.up:hover{
+    opacity: 0.5;
+}
+
+/**************** TITLE ************/
+
+#title{
+    height:100vh;
+    text-align:center;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+#titleh1{
+    font-size:6em;
+    font-family:'Oswald';
+    color:white;
+    margin-bottom: 20px;
+}
+
+#titleh2{
+    font-size:2em;
+    font-family:'Lora';
+    color:white;
+}
+
+/************** SECTION GLOBALS *************/
+
+.sectiontitle {
+    font-size:2em;
+    margin-top:50px;
+    margin-bottom:20px;
+    color:white;
+    font-family: 'Oswald';
+}
+
+/************** ABOUT SECTION *************/
+
+#about{
+    width:100%;
+    height:100vh;
+    background-color:#22A7F0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+}
+
+
+#man{
+    height:100%;
+    width:100%;
+    max-height:400px;
+    max-width:400px;
+    margin-top: 20px;
+    margin-bottom:20px;
+}
+
+#abouttxt {
+    margin-top: 20px;
+    max-width:800px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+/************** WORK SECTION *************/
+
+#work{
+    padding-top:5vh;
+    width:100%;
+    height:100vh;
+    background-color:#22A7F0;
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    flex-direction:column;
+
+}
+
+.worksubtitle {
+    font-size:1.5em;
+    font-family: 'Oswald';
+    color:white;
+}
+
+#workdown{
+    padding-bottom: 40px;
+}
+
+
+
+/************** CV SECTION *************/
+
+#cv{
+    width:100%;
+    height:100vh;
+    background-color:#22A7F0;
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    flex-direction:column;
+}
+
+#maintitlecv{
+   margin-top:100px;
+}
+
+#cvwrap{
+    height:75vh;
+    width:100%;
+    display:flex;
+    justify-content: center;
+}
+
+#timeline{
+    height:75vh;
+    width:35%;
+}
+
+#workhistory{
+    height:75vh;
+    width:35%;
+}
+
+.cvsubtitle {
+    font-size:1.5em;
+    font-family: 'Oswald';
+    color:white;
+    margin-top:20px;
+    margin-bottom:20px;
+    text-align: center;
+
+}
+
+.italic {
+    margin-top:5px;
+    margin-bottom:5px;
+    font-family: 'Lora' ;
+    font-style: italic;
+}
+
+/************** CONTACT SECTION *************/
+
+#contact{
+    width:100%;
+    height:100vh;
+    background-color:#22A7F0;
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    flex-direction:column;
+}
+
+#contactform{
+    display:flex;
+    flex-direction: column;
+}
+
+input[type=submit] {
+    padding:5px 15px;
+    background:blueviolet;
+    border:0 none;
+    cursor:pointer;
+    font-family: 'Oswald';
+    font-size:1.4em;
+    color:white;
+}
+
+input[type=submit]:hover {
+    background:darkblue;
+}
