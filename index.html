@@ -1,69 +1,107 @@
-<html>
-  <head>
-    <title>A-Frame Daydream Controller Component - Basic</title>
-    <script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+  <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
   <script src="https://rawgit.com/ryanbetts/aframe-daydream-controller-component/master/dist/aframe-daydream-controller-component.min.js"></script>
+</head>
+<body>
+  <a-scene>
+    <a-assets>
 
-  </head>
-  <body>
-    <a-scene>
-      <a-entity position="0 0 0">
-        <a-camera></a-camera>
-        <a-entity id="remote" daydream-controller raycaster="objects: .selectable">
-          <a-cone id="ray" color="cyan" position="0 0 -2" rotation="-90 0 0" radius-bottom="0.005" radius-top="0.001" height="4"></a-cone>
-          <a-box id="position-guide" visible="false" position="0 0 -2"></a-box>
-        </a-entity>
+      <img id="boxTexture" src="https://i.imgur.com/mYmmbrp.jpg">
+
+      <a-asset-item id="hallobj" src="models/hall2.obj"></a-asset-item>
+      <a-asset-item id="hallmat" src="models/hall2.mtl"></a-asset-item>
+      <a-asset-item id="wallobj" src="models/wall.obj"></a-asset-item>
+      <a-asset-item id="wallmat" src="models/wall.mtl"></a-asset-item>
+      <a-asset-item id="pots" src="models/flowerpots.obj"></a-asset-item>
+      <a-asset-item id="potsmat" src="models/flowerpots.mtl"></a-asset-item>
+      <a-asset-item id="panel" src="models/panel.obj"></a-asset-item>
+      <a-asset-item id="panelmat" src="models/panel.mtl"></a-asset-item>
+      <a-asset-item id="plinth" src="models/plinth.obj"></a-asset-item>
+      <a-asset-item id="plinthmat" src="models/plinth.mtl"></a-asset-item>
+    </a-assets>
+    <a-entity position="0 0 0">
+      <a-camera position="0 0.8 1.5">
+        <a-cursor></a-cursor>
+      </a-camera>
+      <a-entity id="remote" daydream-controller raycaster="objects: .selectable">
+        <a-cone id="ray" color="cyan" position="0 0 -2" rotation="-90 0 0" radius-bottom="0.005" radius-top="0.001" height="4"></a-cone>
+        <a-box id="position-guide" visible="false" position="0 0 -2"></a-box>
       </a-entity>
-      <a-box id="box" class="selectable" material="color:orange; shader: flat" position="0 1 -4"></a-box>
-      <a-sky color="blue"></a-sky>
-    </a-scene>
-    
-    <script>
-      var remote = document.querySelector('#remote');
-      var box = document.querySelector('#box');
-      var ray = document.querySelector('#ray');
-      var touchStartAxes;
-      var minScale = 0.1;
-      var scaleMultiplier = 1;
-      var newScale = currentScale = 1;
-      var focused = false;
-      // box color change
-      box.addEventListener('raycaster-intersected', function () {
-        if (focused) return;
-        focused = true;
+    </a-entity>
+
+    <a-sky color="#6b9eef"></a-sky>
+
+    <a-light light="intensity: 1.2000000000000002" position="25 25 -11"></a-light>
+    <a-light light="intensity: 1" position="-0.5 4 1.5"></a-light>
+
+    <a-plane color="#d67b20"  height="120" width="120" rotation="-90 0 0" opacity="1"></a-plane>
+
+    <a-box id="box" class="selectable" material="color:orange; shader: flat" position="-6.5 1.5 -1.5"></a-box>
+
+    <a-entity obj-model="obj: #hallobj; mtl: #hallmat" scale="0.05 0.05 0.05" position="0 1 0" rotation="0 90 0"></a-entity>
+    <a-entity obj-model="obj: #wallobj; mtl: #wallmat" scale="0.5 0.5 0.5" position="0 1 0" rotation="0 90 0"></a-entity>
+    <a-entity obj-model="obj: #pots; mtl: #potsmat" scale="0.05 0.05 0.05" position="2.6 1 1.5" rotation="0 90 0"></a-entity>
+    <!--<a-entity obj-model="obj: #plinth; mtl: #plinthmat" scale="0.02 0.02 0.02" position="0 1 0" rotation="0 0 0"></a-entity>
+    <a-entity obj-model="obj: #panel; mtl: #panelmat" scale="0.02 0.02 0.02" position="0 1 1" rotation="-45 0 0"></a-entity>-->
+
+    <a-box src="#boxTexture" position="0 2 -8" rotation="0 45 45" scale="2 2 2">
+      <a-animation attribute="position" to="0 2.2 -5" direction="alternate" dur="2000"
+      repeat="indefinite"></a-animation>
+    </a-box>
+
+    <a-text value="Hello, A-Frame!" color="#000000"
+        position="-1  4 -2" scale="1.5 1.5 1.5"></a-text>
+
+  </a-scene>
+
+  <script>
+    var remote = document.querySelector('#remote');
+    var box = document.querySelector('#box');
+    var ray = document.querySelector('#ray');
+    var touchStartAxes;
+    var minScale = 0.1;
+    var scaleMultiplier = 1;
+    var newScale = currentScale = 1;
+    var focused = false;
+    // box color change
+    box.addEventListener('raycaster-intersected', function () {
+      if (focused) return;
+      focused = true;
+      box.setAttribute('color','purple');
+    });
+    box.addEventListener('raycaster-intersected-cleared', function () {
+      focused = false;
+      box.setAttribute('color','orange');
+    })
+    // trackpad to scale
+    remote.addEventListener('axismove', function (e) {
+      if (!touchStartAxes) return;
+      var deltaX = e.detail.axis[0] - touchStartAxes[0];
+      newScale = currentScale + deltaX*scaleMultiplier;
+      if (newScale < minScale) newScale = minScale;
+      box.setAttribute('scale',newScale+' '+newScale+' '+newScale);
+    });
+    remote.addEventListener('touchstart', function (e) {
+      touchStartAxes = e.detail.axis;
+    });
+    remote.addEventListener('touchend', function (e) {
+      touchStartAxes = null;
+      currentScale = newScale;
+    });
+    remote.addEventListener('buttondown', function (e) {
+      box.setAttribute('color','black');
+    });
+    remote.addEventListener('buttonup', function (e) {
+      if (focused) {
         box.setAttribute('color','purple');
-      });
-      box.addEventListener('raycaster-intersected-cleared', function () {
-        focused = false;
+      } else {
         box.setAttribute('color','orange');
-      })
-      // trackpad to scale
-      remote.addEventListener('axismove', function (e) {
-        if (!touchStartAxes) return;
-        var deltaX = e.detail.axis[0] - touchStartAxes[0];
-        newScale = currentScale + deltaX*scaleMultiplier;
-        if (newScale < minScale) newScale = minScale;
-        box.setAttribute('scale',newScale+' '+newScale+' '+newScale);
-      });
-      remote.addEventListener('touchstart', function (e) {
-        touchStartAxes = e.detail.axis;
-      });
-      remote.addEventListener('touchend', function (e) {
-        touchStartAxes = null;
-        currentScale = newScale;
-      });
-      remote.addEventListener('buttondown', function (e) {
-        box.setAttribute('color','black');
-      });
-      remote.addEventListener('buttonup', function (e) {
-        if (focused) {
-          box.setAttribute('color','purple');
-        } else {
-          box.setAttribute('color','orange');
-        }
-      });
-    </script>
-   
-  </body>
+      }
+    });
+  </script>
+</body>
 </html>
+
 
