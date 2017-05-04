@@ -1,104 +1,77 @@
 <!DOCTYPE html>
-<html lang="eng">
+<html lang="en">
 <head>
-  <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
-  <script src="https://rawgit.com/ryanbetts/aframe-daydream-controller-component/master/dist/aframe-daydream-controller-component.min.js"></script>
+
+<script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+
+
 </head>
+
 <body>
-  <a-scene>
+
+  <a-scene stats>
     <a-assets>
 
-      <img id="boxTexture" src="https://i.imgur.com/mYmmbrp.jpg">
+      <!-- Audio Assets -->
 
-      <a-asset-item id="hallobj" src="hall2.obj"></a-asset-item>
-      <a-asset-item id="hallmat" src="hall2.mtl"></a-asset-item>
-      <a-asset-item id="wallobj" src="wall.obj"></a-asset-item>
-      <a-asset-item id="wallmat" src="wall.mtl"></a-asset-item>
-      <a-asset-item id="pots" src="flowerpots.obj"></a-asset-item>
-      <a-asset-item id="potsmat" src="flowerpots.mtl"></a-asset-item>
-      <a-asset-item id="panel" src="panel.obj"></a-asset-item>
-      <a-asset-item id="panelmat" src="panel.mtl"></a-asset-item>
-      <a-asset-item id="plinth" src="plinth.obj"></a-asset-item>
-      <a-asset-item id="plinthmat" src="plinth.mtl"></a-asset-item>
+      <audio id="click-sound" src="audio/click.wav"></audio>
+
+      <!-- Image assets -->
+
+      <img id="cubes-thumb" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg">
+      <img id="arrow1" src="arrow1.png">
+      <img id="sphereBG" src="sphere1.jpg"></img>
+
+
+      <img id="" src="">
+
     </a-assets>
-    <a-entity position="0 0 0">
-      <a-camera position="0 0.8 1.5">
-        <a-cursor></a-cursor>
-      </a-camera>
-      <a-entity id="remote" daydream-controller raycaster="objects: .selectable">
-        <a-cone id="ray" color="cyan" position="0 0 -2" rotation="-90 0 0" radius-bottom="0.005" radius-top="0.001" height="4"></a-cone>
-        <a-box id="position-guide" visible="false" position="0 0 -2"></a-box>
-      </a-entity>
-    </a-entity>
 
-    <a-sky color="#6b9eef"></a-sky>
+    <!-- 360-degree image. -->
 
-    <a-light light="intensity: 1.2000000000000002" position="25 25 -11"></a-light>
-    <a-light light="intensity: 1" position="-0.5 4 1.5"></a-light>
+    <a-sky id="image-360" radius="10" src="#sphereBG"></a-sky>
 
-    <a-plane color="#d67b20"  height="120" width="120" rotation="-90 0 0" opacity="1"></a-plane>
+    <!-- Camera + Cursor. -->
 
-    <a-box id="box" class="selectable" material="color:orange; shader: flat" position="-6.5 1.5 -1.5"></a-box>
+    <a-camera>
+      <a-cursor id="cursor">
+        <a-animation begin="click" easing="ease-in" attribute="scale"
+                     fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="500"></a-animation>
+        <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale"
+                     from="1 1 1" to="0.1 0.1 0.1" dur="3000"></a-animation>
+      </a-cursor>
+    </a-camera>
 
-    <a-entity obj-model="obj: #hallobj; mtl: #hallmat" scale="0.05 0.05 0.05" position="0 1 0" rotation="0 90 0"></a-entity>
-    <a-entity obj-model="obj: #wallobj; mtl: #wallmat" scale="0.5 0.5 0.5" position="0 1 0" rotation="0 90 0"></a-entity>
-    <a-entity obj-model="obj: #pots; mtl: #potsmat" scale="0.05 0.05 0.05" position="2.6 1 1.5" rotation="0 90 0"></a-entity>
-    <!--<a-entity obj-model="obj: #plinth; mtl: #plinthmat" scale="0.02 0.02 0.02" position="0 1 0" rotation="0 0 0"></a-entity>
-    <a-entity obj-model="obj: #panel; mtl: #panelmat" scale="0.02 0.02 0.02" position="0 1 1" rotation="-45 0 0"></a-entity>-->
+    <!-- Planes -->
 
-    
+    <a-entity id="rock-plane"
+      geometry="primitive: plane; height: 1; width: 3"
+      material="shader: flat;"
+      position="-2.5 -0.1 0"
+      rotation="-22 90 0"
+      text="value: Hello TEST 1133243; color: #000; align: center"></a-entity>
 
-    <a-text value="Hello, A-Frame!" color="#000000"
-        position="-1  4 -2" scale="1.5 1.5 1.5"></a-text>
+
+    <a-entity id="glacer-plane"
+      geometry="primitive: plane; height: 1; width: 3"
+      material="shader: flat; src: #cubes-thumb"
+      position="1.5 -0.1 -1.2"
+      rotation="-22 -60 0"></a-entity>
+
+
+    <!-- Images -->
+
+    <a-image id="glacier-arrow"
+      src="#arrow1"
+      position="6 0.5 -6"
+      rotation="0 112 0"
+      geometry="height: 1; width: 2"></a-image>
+
 
   </a-scene>
 
-  <script>
-    var remote = document.querySelector('#remote');
-    var box = document.querySelector('#box');
-    var ray = document.querySelector('#ray');
-    var touchStartAxes;
-    var minScale = 0.1;
-    var scaleMultiplier = 1;
-    var newScale = currentScale = 1;
-    var focused = false;
-    // box color change
-    box.addEventListener('raycaster-intersected', function () {
-      if (focused) return;
-      focused = true;
-      box.setAttribute('color','purple');
-    });
-    box.addEventListener('raycaster-intersected-cleared', function () {
-      focused = false;
-      box.setAttribute('color','orange');
-    })
-    // trackpad to scale
-    remote.addEventListener('axismove', function (e) {
-      if (!touchStartAxes) return;
-      var deltaX = e.detail.axis[0] - touchStartAxes[0];
-      newScale = currentScale + deltaX*scaleMultiplier;
-      if (newScale < minScale) newScale = minScale;
-      box.setAttribute('scale',newScale+' '+newScale+' '+newScale);
-    });
-    remote.addEventListener('touchstart', function (e) {
-      touchStartAxes = e.detail.axis;
-    });
-    remote.addEventListener('touchend', function (e) {
-      touchStartAxes = null;
-      currentScale = newScale;
-    });
-    remote.addEventListener('buttondown', function (e) {
-      box.setAttribute('color','black');
-    });
-    remote.addEventListener('buttonup', function (e) {
-      if (focused) {
-        box.setAttribute('color','purple');
-      } else {
-        box.setAttribute('color','orange');
-      }
-    });
-  </script>
 </body>
 </html>
+
 
 
