@@ -15,12 +15,15 @@
       <!-- Audio Assets -->
 
       <audio id="click-sound" src="audio/click.wav"></audio>
+      <audio id="audio1" src="audio/audio1.mp3"></audio>
+      <audio id="audio2" src="audio/audio2.mp3"></audio>
 
       <!-- Image assets -->
 
       <img id="cubes-thumb" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg">
-      <img id="arrow1" src="arrow1.png">
-      <img id="sphereBG" src="sphere1.jpg"></img>
+      <img id="arrow1" src="imgs/arrow1.png">
+      <img id="sphereBG" src="imgs/sphere1.jpg"></img>
+      <img id="play" src="imgs/playBtn.jpg"></img>
 
 
       <img id="" src="">
@@ -45,18 +48,19 @@
     <!-- Planes -->
 
     <a-entity id="rock-plane"
-      geometry="primitive: plane; height: 1; width: 3"
-      material="shader: flat;"
+      geometry="primitive: plane; height: 1; width: 1"
+      material="shader: flat; src: #play"
       position="-2.5 -0.1 0"
       rotation="-22 90 0"
-      text="value: Hello TEST 1133243; color: #000; align: center"></a-entity>
+      sound="src: #audio1; on: click"></a-entity>
 
 
     <a-entity id="glacer-plane"
       geometry="primitive: plane; height: 1; width: 3"
       material="shader: flat; src: #cubes-thumb"
       position="1.5 -0.1 -1.2"
-      rotation="-22 -60 0"></a-entity>
+      rotation="-22 -60 0"
+      sound="src: #audio2; on: click"></a-entity>
 
 
     <!-- Images -->
@@ -72,6 +76,3 @@
 
 </body>
 </html>
-
-
-
