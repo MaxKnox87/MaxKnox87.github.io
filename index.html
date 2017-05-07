@@ -1,39 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-gb">
 <head>
 
 <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
-
+<script src="https://bitbucket.org/realitylab_ruben/aframe-travel-node.git"></script>
+<script src="https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js"></script>
+<script src="https://rawgit.com/ryanbetts/aframe-daydream-controller-component/master/dist/aframe-daydream-controller-component.min.js"></script>
+<script src="moveComponent.js"></script>
 
 </head>
 
 <body>
 
-  <a-scene stats>
+  <!-- COMPONENTS -->
+
+
+
+  <a-scene stats travel-node-defaults="axis: x,y,z; offsetY: 0.75; animationDur: 3000">
     <a-assets>
 
       <!-- Audio Assets -->
 
-      <audio id="click-sound" src="click.wav"></audio>
-      <audio id="audio1" src="audio1.mp3"></audio>
-      <audio id="audio2" src="audio2.mp3"></audio>
+      <!--<audio id="click-sound" src="audio/click.wav"></audio>
+      <audio id="audio1" src="audio/audio1.mp3"></audio>
+      <audio id="audio2" src="audio/audio2.mp3"></audio>-->
 
       <!-- Image assets -->
 
-      <img id="cubes-thumb" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg">
-      <img id="arrow1" src="arrow1.png">
-      <img id="sphereBG" src="sphere1.jpg"></img>
-      <img id="play" src="playBtn.jpg"></img>
-
-
-      <img id="" src="">
+      <!--<img id="arrow1" src="imgs/arrow1.png">
+      <img id="sphereBG" src="imgs/sphere1.jpg"></img>
+      <img id="play" src="imgs/playBtn.png"></img>
+      <img id="" src="">-->
 
     </a-assets>
 
     <!-- 360-degree image. -->
 
-    <a-sky id="image-360" radius="10" src="#sphereBG"></a-sky>
+    <!--<a-sky id="image-360" radius="10" src="#sphereBG"></a-sky>-->
 
+    <a-sky color="#4fd8ea"></a-sky>
+    <a-plane color="#c1af45" height="100" width="100" rotation="-90 0 0"></a-plane>
     <!-- Camera + Cursor. -->
 
     <a-camera>
@@ -46,31 +52,35 @@
     </a-camera>
 
     <!-- Planes -->
+    <a-sphere id="node-move" position="-20 0.25 0" radius=".25" color="#EDC34C" travel-node="transition: move"></a-sphere>
+    <a-sphere id="node-fade" position="2 0.25 0" radius=".25" color="#4CC3D9" travel-node></a-sphere>
 
-    <a-entity id="rock-plane"
-      geometry="primitive: plane; height: 1; width: 1"
-      material="shader: flat; src: #play"
-      position="-2.5 -0.1 0"
-      rotation="-22 90 0"
-      sound="src: #audio1; on: click"></a-entity>
+    <a-entity travel-node id="box1" class="navPoint"
+    geometry="primitive: box; height :1; width:1;"
+    material="color:red"
+    position="0 1 -5">
+    <a-animation
+    attribute="rotation"
+    dur="3000"
+    to="0 360 0"
+    repeat="indefinite"></a-animation>
+    </a-entity>
+
+    <a-entity id="box2" class="navPoint"
+    geometry="primitive: box; height :1; width:1;"
+    material="color:green"
+    position="3 1 -5" ></a-entity>
 
 
-    <a-entity id="glacer-plane"
-      geometry="primitive: plane; height: 1; width: 3"
-      material="shader: flat; src: #cubes-thumb"
-      position="1.5 -0.1 -1.2"
-      rotation="-22 -60 0"
-      sound="src: #audio2; on: click"></a-entity>
+    <a-entity id="welcomePanel"
+    geometry="primitive: plane; height :1; width: 3;"
+    material="color: #739122"
+    position="-2 2 -3"
+    text="align:center; color: white; value: Welcome, please have a look around and enjoy your stay. \n Use the cursor in the center of your screen to interact with objects."></a-entity>
+
 
 
     <!-- Images -->
-
-    <a-image id="glacier-arrow"
-      src="#arrow1"
-      position="6 0.5 -6"
-      rotation="0 112 0"
-      geometry="height: 1; width: 2"></a-image>
-
 
   </a-scene>
 
