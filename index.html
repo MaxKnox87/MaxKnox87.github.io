@@ -41,7 +41,7 @@
     <a-sky color="#4fd8ea"></a-sky>
     <a-plane color="#c1af45" height="100" width="100" rotation="-90 0 0"></a-plane>
     <!-- Camera + Cursor. -->
-    <a-entity position="0 0 0">
+    
       <a-camera>
         <a-cursor id="cursor">
           <a-animation begin="click" easing="ease-in" attribute="scale"
@@ -55,13 +55,13 @@
             <a-cone id="ray" color="cyan" position="0 0 -2" rotation="-90 0 0" radius-bottom="0.005" radius-top="0.001" height="4"></a-cone>
             <a-box id="position-guide" visible="false" position="0 0 -2"></a-box>
       </a-entity>
-    </a-entity>
+    
 
     <!-- Planes -->
     <a-sphere id="node-move" position="-20 0.25 0" radius=".25" color="#EDC34C" travel-node="transition: move"></a-sphere>
     <a-sphere id="node-fade" position="2 0.25 0" radius=".25" color="#4CC3D9" travel-node></a-sphere>
 
-    <a-entity travel-node id="box1" class="navPoint"
+    <a-entity travel-node id="box1" class="selectable"
     geometry="primitive: box; height :1; width:1;"
     material="color:red"
     position="0 1 -5">
