@@ -6,7 +6,18 @@
 <script src="https://bitbucket.org/realitylab_ruben/aframe-travel-node.git"></script>
 <script src="https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js"></script>
 <script src="https://rawgit.com/ryanbetts/aframe-daydream-controller-component/master/dist/aframe-daydream-controller-component.min.js"></script>
+<script src="https://rawgit.com/ngokevin/aframe-event-set-component/master/dist/aframe-event-set-component.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="moveComponent.js"></script>
+<script src="turnOff.js"></script>
+
+
+<scirpt>
+  <!-- HIDE SCENE ELEMENTS COMPONENT -->
+
+
+</script>
 
 </head>
 
@@ -16,79 +27,264 @@
 
 
 
-  <a-scene stats travel-node-defaults="axis: x,y,z; offsetY: 0.75; animationDur: 3000">
+
+
+  <a-scene
+    stats
+    travel-node-defaults="axis: x,y,z; offsetY: 0.75; animationDur: 3000">
+
+
     <a-assets>
 
       <!-- Audio Assets -->
 
-      <!--<audio id="click-sound" src="audio/click.wav"></audio>
+      <audio id="click-sound" src="audio/click.wav"></audio>
       <audio id="audio1" src="audio/audio1.mp3"></audio>
-      <audio id="audio2" src="audio/audio2.mp3"></audio>-->
+      <audio id="audio2" src="audio/audio2.mp3"></audio>
 
       <!-- Image assets -->
 
-      <!--<img id="arrow1" src="imgs/arrow1.png">
+      <img id="arrow1" src="imgs/arrow1.png">
       <img id="sphereBG" src="imgs/sphere1.jpg"></img>
       <img id="play" src="imgs/playBtn.png"></img>
-      <img id="" src="">-->
+      <img id="stone" src="imgs/sandstone.jpg">
+
+      <!-- model assets -->
+
+
+
 
     </a-assets>
 
-    <!-- 360-degree image. -->
-
-    <!--<a-sky id="image-360" radius="10" src="#sphereBG"></a-sky>-->
+    <!-- SKY AND GROUND -->
 
     <a-sky color="#4fd8ea"></a-sky>
-    <a-plane color="#c1af45" height="100" width="100" rotation="-90 0 0"></a-plane>
-    <!-- Camera + Cursor. -->
-    
-      <a-camera>
-        <a-cursor id="cursor">
-          <a-animation begin="click" easing="ease-in" attribute="scale"
-                       fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="500"></a-animation>
-          <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale"
-                       from="1 1 1" to="0.1 0.1 0.1" dur="3000"></a-animation>               
-        </a-cursor>
-      </a-camera>
+    <a-plane id="floor" color="#c1af45" height="100" width="100" rotation="-90 0 0"></a-plane>
 
-      <a-entity id="remote" daydream-controller raycaster="objects: .selectable">
-            <a-cone id="ray" color="cyan" position="0 0 -2" rotation="-90 0 0" radius-bottom="0.005" radius-top="0.001" height="4"></a-cone>
-            <a-box id="position-guide" visible="false" position="0 0 -2"></a-box>
-      </a-entity>
-    
+    <!-- CAMERA AND CURSOR -->
 
-    <!-- Planes -->
-    <a-sphere id="node-move" position="-20 0.25 0" radius=".25" color="#EDC34C" travel-node="transition: move"></a-sphere>
-    <a-sphere id="node-fade" position="2 0.25 0" radius=".25" color="#4CC3D9" travel-node></a-sphere>
-
-    <a-entity travel-node id="box1" class="selectable"
-    geometry="primitive: box; height :1; width:1;"
-    material="color:red"
-    position="0 1 -5">
-    <a-animation
-    attribute="rotation"
-    dur="3000"
-    to="0 360 0"
-    repeat="indefinite"></a-animation>
-    </a-entity>
-
-    <a-entity id="box2" class="navPoint"
-    geometry="primitive: box; height :1; width:1;"
-    material="color:green"
-    position="3 1 -5" ></a-entity>
+    <a-camera position="8.3 0 8.7" rotation="0 90 0">
+      <a-cursor id="cursor" fuse="true" fuseTimeout="500">
+        <a-animation begin="click" easing="ease-in" attribute="scale"
+                     fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="500"></a-animation>
+        <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale"
+                     from="1 1 1" to="0.1 0.1 0.1" dur="3000"></a-animation>
+      </a-cursor>
 
 
+
+    </a-camera>
+
+    <!--<a-entity id="remote" daydream-controller raycaster="objects: .selectable">
+      <a-cone id="ray" color="cyan" position="0 0 -2" rotation="-90 0 0" radius-bottom="0.005" radius-top="0.001" height="4"></a-cone>
+      <a-box id="position-guide" visible="false" position="0 0 -2"></a-box>
+    </a-entity>-->
+
+    <!-- NAVIGATION NODES -->
+
+    <a-sphere id="node-move" position="-2.5 0.5 9.5" radius=".5" color="green" travel-node="transition: move"></a-sphere>
+    <a-sphere id="node-move" position="20 0.5 9" radius=".5" color="green" travel-node="transition: move"></a-sphere>
+    <a-sphere id="node-move" position="8.3 0.5 8.7" radius=".5" color="green" travel-node="transition: move"></a-sphere>
+
+    <!-- CONTROL NODES -->
+
+    <!-- EXPERIENCE ELEMENTS -->
+
+    <!-- START AREA -->
+<a-entity id="wrap" position = "7 0 9.5" rotation = "0 90 0">
     <a-entity id="welcomePanel"
     geometry="primitive: plane; height :1; width: 3;"
     material="color: #739122"
-    position="-2 2 -3"
+    position="-2 2 -1"
+    rotation="0 45 0"
     text="align:center; color: white; value: Welcome, please have a look around and enjoy your stay. \n Use the cursor in the center of your screen to interact with objects."></a-entity>
 
 
+    <!-- VIRTUAL TOUR -->
+    <a-entity id="vTWelcome">
+      <a-entity id="vtWelcomePanel"
+      geometry="primitive: plane; height :1; width: 3;"
+      material="color: #739122"
+      position="0 1 -12.3"
+      text="align:center; color: white; value: Welcome, please have a look around and enjoy your stay. \n Use the cursor in the center of your screen to interact with objects."></a-entity>
 
-    <!-- Images -->
+      <a-entity id="vtStartPanel"
+      event-set__1="_event: click; visible: true; _target: #vTour"
+      event-set__2="_event: click; visible: false; _target: #vTWelcome"
+      event-set__3="_event: click; visible: false; _target: #floor"
+      geometry="primitive: plane; height :1; width: 1;"
+      material="color: #b57727"
+      position="-2.3 1 -12"
+      rotation="0 40  0"
+      text="align:center; color: white; value: Start VT"></a-entity>
+    </a-entity>
+
+    <a-entity id="vTour" visible="false" position="0 0 -11.2">
+      <!-- 360-degree image. -->
+      <a-sky id="image-360" radius="10" src="#sphereBG"></a-sky>
+
+      <!-- Planes -->
+
+      <a-entity id="rock-plane"
+        geometry="primitive: plane; height: 1; width: 2"
+        material="color: #b57727"
+        position="-2.5 -0.1 0"
+        rotation="-22 90 0"
+        text="align: center; color: white; value: Play Audio"
+        sound="src: #audio1; on: click"></a-entity>
+
+
+      <a-entity id="glacer-plane"
+        geometry="primitive: plane; height: 1; width: 2"
+        material="color: #b57727"
+        position="1.5 -0.1 -1.2"
+        rotation="-22 -60 0"
+        text="align: center; color: white; value: Play Audio"
+        sound="src: #audio2; on: click"></a-entity>
+
+        <a-entity id="exit-plane"
+          event-set__1="_event: click; visible: false; _target: #vTour"
+          event-set__2="_event: click; visible: true; _target: #vTWelcome"
+          event-set__3="_event: click; visible: true; _target: #floor"
+          geometry="primitive: plane; height: 1; width: 2"
+          material="color: #b57727"
+          position="0 -0.1 3.8"
+          rotation="-22 180 0"
+          text="align: center; color: white; value: EXIT"
+          sound="src: #click-sound; on: click"></a-entity>
+
+
+      <!-- Images -->
+
+      <a-image id="glacier-arrow"
+        src="#arrow1"
+        position="6 0.5 -6"
+        rotation="0 112 0"
+        geometry="height: 1; width: 2"></a-image>
+
+    </a-entity><!-- end of VT -->
+
+    <!-- DATA VISUALISATION -->
+
+
+
+    <!-- GAME -->
+    <a-entity id="gamePanel"
+    geometry="primitive: plane; height :3; width: 4;"
+    material="src: #stone"
+    position="0 1 16.3"
+    rotation="0 180 0"></a-entity>
+
+    <a-entity id="gamePane2"
+    geometry="primitive: plane; height :1; width: 2;"
+    material="color: #b57727"
+    position="2 0.5 15"
+    rotation="0 220 0"
+    text="align: center; color: white; value: GAME"></a-entity>
+
+
+
+
+
+</a-entity>
 
   </a-scene>
+
+
+  <script>
+  	// default alpha for bars
+	var alpha = 0.6
+
+    // fake data
+    var data = [ 19, 80, 30, 15, 55, 35, 40,
+                45, 50, 70, 109, 35, 78,
+               87, 76, 22, 2, 33, 44, 59, 200]
+
+     var animals = [ 'Bobcat', 'Dog', 'Cat', 'Boar', 'Cheetah', 'Chimp', 'Dragon',
+                'Elephant', 'Human', 'Elf', 'Giant', 'Batman', 'Donkey',
+               'Henry', 'Face', 'Funny', 'Kitty', 'Doggy', 'Joker', 'Alf', 'Earth']
+
+    // we scale the height of our bars using d3's linear scale
+    var hscale = d3.scale.linear()
+    	.domain([0, d3.max(data)])
+    	.range([0, 3])
+
+    // we select the scene object just like an svg
+    var scene = d3.select("a-scene")
+
+    // we use d3's enter/update/exit pattern to draw and bind our dom elements
+    var bars = scene.selectAll("a-box.bar").data(data)
+    bars.enter().append("a-box").classed("bar", true)
+
+    $( ".bar" ).append( "<a-text> </a-text>" );
+    // we set attributes on our cubes to determine how they are rendered
+    bars.attr({
+      position: function(d,i) {
+        var x =  i*.75
+        var y = hscale(d)/2;
+        var z = 1
+        return x + " " + y + " " + z
+      },
+      width: function(d) { return 0.5},
+      depth: function(d) { return 0.5},
+      height: function(d) { return hscale(d)},
+      opacity: alpha,
+      color: 'blue'
+    })
+    .on("click", function(d,i) {
+      console.log("click", i,d)
+    })
+    .on("mouseenter", function(d,i) {
+      // this event gets fired continuously as long as the cursor
+      // is over the element. we only want trigger our animation the first time
+      if(this.hovering) return;
+      console.log("hover", i,d)
+      this.hovering = true;
+      d3.select(this).transition().duration(10)
+      .attr({
+        metalness: 0.8,
+        opacity: .9
+      })
+       d3.select(this).select("a-text")
+      .attr({
+	        	'color':'hsla(240, 100%, 25%, 0.6)',
+	        	'align':'center',
+	        	'position':'0 '+ (hscale(d)/2+.5) + ' 0',
+	        	'scale':'1 1 1',
+	        	'value': animals[i]+', '+d
+      })
+    })
+    .on("mouseleave", function(d,i) {
+      console.log("leave",i,d)
+      this.hovering = false;
+      d3.select(this).transition().duration(500)
+      .attr({
+        metalness: 0,
+        opacity: alpha
+      })
+       d3.select(this).select("a-text")
+      .attr({
+	        	'color':'blue',
+	        	'align':'center',
+	        	'position':'0 '+ (hscale(d)/2+.5) + ' 0',
+	        	'scale':'.01 .01 .01',
+	        	'value': d
+      })
+    })
+
+
+  </script>
+
+  <script>
+
+    $(".bar").each(function() {
+        this.components.material.material.alphaTest = 0.5;
+      this.components.material.material.depthWrite = false;
+      this.components.material.material.needsUpdate = true;;
+    });
+
+	</script>
+
 
 </body>
 </html>
